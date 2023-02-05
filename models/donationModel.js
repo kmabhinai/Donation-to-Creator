@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const User = require('./userModels');
 
 const donationSchema = new mongoose.Schema({
     from: {

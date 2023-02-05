@@ -10,6 +10,11 @@ router
     .route("/create")
     .post(donationController.createDonation);
 
-router.use(authController.restrictTo('admin'));
+// router
+//     .route('/getTotalDonations')
+//     .post(
+//         authController.restrictTo('creator'),
+//         authController.getTotalDonations
+//     );
 
 module.exports = router;
