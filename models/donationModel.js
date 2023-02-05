@@ -3,12 +3,12 @@ const mongoose = require('mongoose');
 const donationSchema = new mongoose.Schema({
     from: {
         type: mongoose.Schema.ObjectId,
-        ref: 'users',
+        ref: 'User',
         required: [true, 'Donar User Id is required']
     },
     to: {
         type: mongoose.Schema.ObjectId,
-        ref: 'users',
+        ref: 'User',
         required: [true, 'Receiver User Id is required']
     },
     currency: {
@@ -21,15 +21,15 @@ const donationSchema = new mongoose.Schema({
     },
     name: String,
     message: String
-});
+},
+    {
+        toJSON: { virtuals: true },
+        toObject: { virtuals: true }
+    });
 
 donationSchema.pre(/^find/, function (next) {
     this.populate({
-        path: 'from',
-        select: 'username'
-    }).populate({
-        path: 'to',
-        select: 'username'
+        path: 'to'
     });
     next();
 });

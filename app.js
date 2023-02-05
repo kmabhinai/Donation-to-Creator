@@ -30,7 +30,7 @@ const limiter = rateLimit({
 app.use('/api', limiter);
 
 //Body parser
-app.use(express.json({ limit: '10kb' })); // Middle wear modifies the req and res objects
+app.use(express.json({ limit: '10kb' }));
 
 // Data sanitization against NoSQL query injection
 app.use(mongoSanitize());
@@ -38,10 +38,8 @@ app.use(mongoSanitize());
 // Data sanitization against XSS
 app.use(xss());
 
-//Prevent parameter pollution
-app.use(hpp({
-    whitelist: ['duration', 'ratingsAverage', 'ratingsQuantity', 'difficulty', 'price']
-}));
+//Prevent parameter pollution from dup param
+app.use(hpp());
 
 app.use('/user', userRouter);
 app.use('/donate', donationRouter);

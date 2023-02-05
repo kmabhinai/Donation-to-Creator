@@ -16,11 +16,4 @@ router
     .route("/getCreators")
     .get(userController.getCreators);
 
-//Protect all users after this
-router.use(authController.protect);
-
-
-
-router.use(authController.restrictTo('admin'));
-
 module.exports = router;
